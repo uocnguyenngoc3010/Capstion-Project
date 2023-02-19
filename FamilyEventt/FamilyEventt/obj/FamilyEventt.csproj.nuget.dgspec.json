@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\CaptionProject\\FamilyEventt\\FamilyEventt\\FamilyEventt.csproj": {}
+    "A:\\DH\\UocPJ\\Capstion-Project\\FamilyEventt\\FamilyEventt\\FamilyEventt.csproj": {}
   },
   "projects": {
-    "D:\\CaptionProject\\FamilyEventt\\FamilyEventt\\FamilyEventt.csproj": {
+    "A:\\DH\\UocPJ\\Capstion-Project\\FamilyEventt\\FamilyEventt\\FamilyEventt.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\CaptionProject\\FamilyEventt\\FamilyEventt\\FamilyEventt.csproj",
+        "projectUniqueName": "A:\\DH\\UocPJ\\Capstion-Project\\FamilyEventt\\FamilyEventt\\FamilyEventt.csproj",
         "projectName": "FamilyEventt",
-        "projectPath": "D:\\CaptionProject\\FamilyEventt\\FamilyEventt\\FamilyEventt.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\CaptionProject\\FamilyEventt\\FamilyEventt\\obj\\",
+        "projectPath": "A:\\DH\\UocPJ\\Capstion-Project\\FamilyEventt\\FamilyEventt\\FamilyEventt.csproj",
+        "packagesPath": "C:\\Users\\manht\\.nuget\\packages\\",
+        "outputPath": "A:\\DH\\UocPJ\\Capstion-Project\\FamilyEventt\\FamilyEventt\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\manht\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +22,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://dotnet.myget.org/F/dotnet-core/api/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
@@ -98,7 +95,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

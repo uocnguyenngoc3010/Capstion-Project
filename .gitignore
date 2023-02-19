@@ -402,3 +402,14 @@ FamilyEventt/FamilyEventt/bin/Debug/net6.0/FamilyEventt.dll
 *.pdb
 *.exe
 *.cache
+*.v2
+*.v2
+FamilyEventt/.vs/FamilyEventt/v17/.suo
+*.dll
+*.exe
+*.pdb
+*.exe
+*.cache
+*.txt
+*.dll
+*.props

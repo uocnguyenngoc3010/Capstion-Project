@@ -396,3 +396,9 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+*.vsidx
+FamilyEventt/FamilyEventt/bin/Debug/net6.0/FamilyEventt.dll
+*.dll
+*.pdb
+*.exe
+*.cache

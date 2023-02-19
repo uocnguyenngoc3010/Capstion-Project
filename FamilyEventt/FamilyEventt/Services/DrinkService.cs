@@ -14,7 +14,7 @@ namespace FamilyEventt.Services
             this.context = context;
         }
 
-        public async Task <bool> DeleteDrink(int id)
+        public async Task<bool> DeleteDrink(int id)
         {
             try
             {
@@ -29,7 +29,7 @@ namespace FamilyEventt.Services
                 }
                 else
                 {
-                    throw new Exception("Not Found Name Product!");
+                    throw new Exception("Not Found name drink!");
                 }
             }
             catch (Exception ex)
@@ -38,7 +38,7 @@ namespace FamilyEventt.Services
             }
         }
 
-        public async Task <List<Drink>> GetAllDrinks()
+        public async Task<List<Drink>>GetAllDrinks()
         {
             try
             {
@@ -51,12 +51,12 @@ namespace FamilyEventt.Services
            
         }
 
-        public async Task <bool> InsertDrink(DrinkDto drink)
+        public async Task<bool> InsertDrink(DrinkDto drink)
         {
             try
             {
                 var _drink = new Drink();
-                _drink.ProductId = drink.ProductId;
+                
                 _drink.Status = drink.Status;
                 _drink.Name = drink.Name;
                 _drink.Detail = drink.Detail;
@@ -74,7 +74,7 @@ namespace FamilyEventt.Services
 
         }
 
-        public async Task <List<Drink>> SearchByNameDrinks(string name)
+        public async Task<List<Drink>> SearchByNameDrinks(string name)
         {
             try
             {
@@ -87,23 +87,28 @@ namespace FamilyEventt.Services
             }
         }
 
-       /* public async Task<List<Drink>> SearchByIDDrinks(int id)
+        public async Task<Drink> GetByIdDrinks(int id)
         {
             try
             {
-                var data = await this.context.Drink.SingleOrDefaultAsync(x =>x.Status && x.ProductId == id);
-                if (data != null)
+                Drink drink = await this.context.Drink.Where(x => x.Status && x.ProductId == id).Select(x => new Drink()
                 {
-                    
-                    return data;
-                }
-                
+                    ProductId= x.ProductId,
+                    Name= x.Name,
+                    Quantity= x.Quantity,
+                    Price= x.Price,
+                    Detail = x.Detail,
+                    Image= x.Image,
+
+            }).FirstOrDefaultAsync();
+                return drink;
+
             }
             catch (Exception ex)
             {
                 throw new Exception();
             }
-        }*/
+        }
 
         public async Task <bool>  UpdateDrink(DrinkDto upDrink)
         {

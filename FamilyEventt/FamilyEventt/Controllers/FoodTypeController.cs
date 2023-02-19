@@ -1,5 +1,6 @@
 ﻿using FamilyEventt.Dto;
 using FamilyEventt.Interfaces;
+using FamilyEventt.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FamilyEventt.Controllers
@@ -19,7 +20,7 @@ namespace FamilyEventt.Controllers
         public async Task <IActionResult> GetAll()
         {
 
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<FoodType>> responseAPI = new ResponseAPI<List<FoodType>>();
             try
             {
                 responseAPI.Data = await this._foodTypeService.GetAllFoodTypes();
@@ -35,7 +36,7 @@ namespace FamilyEventt.Controllers
         [HttpPost]
         public async Task <IActionResult> InsertFoodType(FoodTypeDto foodType)
         {
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<FoodType>> responseAPI = new ResponseAPI<List<FoodType>>();
             try
             {
                 responseAPI.Data =await this._foodTypeService.InsertFoodType(foodType);
@@ -51,7 +52,7 @@ namespace FamilyEventt.Controllers
         [HttpGet]
         public async Task <IActionResult> SearchByNameFoodTypes(string name)
         {
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<FoodType>> responseAPI = new ResponseAPI<List<FoodType>>();
             try
             {
                 responseAPI.Data = await this._foodTypeService.SearchByNameFoodTypes(name);
@@ -67,7 +68,7 @@ namespace FamilyEventt.Controllers
         [HttpPut]
         public async Task <IActionResult> UpdateFoodType(FoodTypeDto upFoodType)
         {
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<FoodType>> responseAPI = new ResponseAPI<List<FoodType>>();
             try
             {
                 responseAPI.Data = await this._foodTypeService.UpdateFoodType(upFoodType);
@@ -83,7 +84,7 @@ namespace FamilyEventt.Controllers
         [HttpPut]
         public async Task <IActionResult> DeleteFoodType(int id)
         {
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<FoodType>> responseAPI = new ResponseAPI<List<FoodType>>();
             try
             {
                 responseAPI.Data = await this._foodTypeService.DeleteFoodType(id);

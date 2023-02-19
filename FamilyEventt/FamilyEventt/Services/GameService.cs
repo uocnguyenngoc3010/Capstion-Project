@@ -37,7 +37,6 @@ namespace FamilyEventt.Services
                 return false;
             }
         }
-
         public async Task <List<Game>> GetAllGames()
         {
             try

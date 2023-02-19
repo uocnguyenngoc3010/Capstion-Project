@@ -9,9 +9,10 @@ namespace FamilyEventt.Models
     {
         public int ChatId { get; set; }
         public int EventBookerId { get; set; }
-        public int StaffId { get; set; }
+        public int? StaffId { get; set; }
         public string Message { get; set; }
         public DateTime Date { get; set; }
+        public bool Status { get; set; }
 
         public virtual EventBooker EventBooker { get; set; }
     }

@@ -27,5 +27,6 @@ namespace FamilyEventt.Models
 
         public virtual FoodType FoodType { get; set; }
         public virtual ICollection<MenuProduct> MenuProduct { get; set; }
+        public virtual ICollection<FoodType> FoodTypes { get; set; }
     }
 }

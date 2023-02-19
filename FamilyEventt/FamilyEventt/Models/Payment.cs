@@ -7,18 +7,13 @@ namespace FamilyEventt.Models
 {
     public partial class Payment
     {
-        public Payment()
-        {
-            Refund = new HashSet<Refund>();
-        }
-
         public int PaymentId { get; set; }
-        public int EventOrderId { get; set; }
+        public int EventId { get; set; }
         public decimal Amount { get; set; }
+        public string PayContent { get; set; }
         public DateTime Date { get; set; }
         public bool Status { get; set; }
 
-        public virtual EventOrder EventOrder { get; set; }
-        public virtual ICollection<Refund> Refund { get; set; }
+        public virtual Event Event { get; set; }
     }
 }

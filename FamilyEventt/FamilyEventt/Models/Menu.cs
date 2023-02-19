@@ -9,16 +9,17 @@ namespace FamilyEventt.Models
     {
         public Menu()
         {
+            Event = new HashSet<Event>();
             MenuDrink = new HashSet<MenuDrink>();
             MenuProduct = new HashSet<MenuProduct>();
         }
 
         public int MenuId { get; set; }
+        public string Name { get; set; }
         public bool Status { get; set; }
-        public int EventId { get; set; }
         public decimal PriceTotal { get; set; }
 
-        public virtual Event Event { get; set; }
+        public virtual ICollection<Event> Event { get; set; }
         public virtual ICollection<MenuDrink> MenuDrink { get; set; }
         public virtual ICollection<MenuProduct> MenuProduct { get; set; }
     }

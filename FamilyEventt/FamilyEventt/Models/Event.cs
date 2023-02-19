@@ -10,24 +10,29 @@ namespace FamilyEventt.Models
         public Event()
         {
             DateTimeLocation = new HashSet<DateTimeLocation>();
-            Entertainment = new HashSet<Entertainment>();
-            Menu = new HashSet<Menu>();
+            Payment = new HashSet<Payment>();
         }
 
         public int EventId { get; set; }
         public int ScriptId { get; set; }
-        public int RoomId { get; set; }
         public int DecorationId { get; set; }
         public int EventTypeId { get; set; }
-        public int OrderId { get; set; }
+        public int MenuId { get; set; }
+        public int EntertainmentId { get; set; }
+        public int EventBookerId { get; set; }
+        public string OrganizedPerson { get; set; }
+        public DateTime StartDate { get; set; }
+        public decimal TotalPrice { get; set; }
+        public DateTime EndDate { get; set; }
+        public bool Status { get; set; }
 
         public virtual Decoration Decoration { get; set; }
+        public virtual Entertainment Entertainment { get; set; }
+        public virtual EventBooker EventBooker { get; set; }
         public virtual EventType EventType { get; set; }
-        public virtual EventOrder Order { get; set; }
-        public virtual Room Room { get; set; }
+        public virtual Menu Menu { get; set; }
         public virtual Script Script { get; set; }
         public virtual ICollection<DateTimeLocation> DateTimeLocation { get; set; }
-        public virtual ICollection<Entertainment> Entertainment { get; set; }
-        public virtual ICollection<Menu> Menu { get; set; }
+        public virtual ICollection<Payment> Payment { get; set; }
     }
 }

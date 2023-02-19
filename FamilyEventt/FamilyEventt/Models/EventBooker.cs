@@ -10,7 +10,7 @@ namespace FamilyEventt.Models
         public EventBooker()
         {
             ChatMessage = new HashSet<ChatMessage>();
-            EventOrder = new HashSet<EventOrder>();
+            Event = new HashSet<Event>();
         }
 
         public int Id { get; set; }
@@ -21,7 +21,8 @@ namespace FamilyEventt.Models
         public string Image { get; set; }
         public bool Status { get; set; }
 
+        public virtual Account IdNavigation { get; set; }
         public virtual ICollection<ChatMessage> ChatMessage { get; set; }
-        public virtual ICollection<EventOrder> EventOrder { get; set; }
+        public virtual ICollection<Event> Event { get; set; }
     }
 }

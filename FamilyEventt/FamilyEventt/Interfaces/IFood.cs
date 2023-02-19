@@ -5,6 +5,7 @@ namespace FamilyEventt.Interfaces
 {
     public interface IFood
     {
+        Task<Food> GetAllFoodById(int id);
         Task<List<Food>> GetAllFoods();
         Task<List<Food>> SearchByNameFoods(string name);
         Task<bool> UpdateFood(FoodDto upFood);

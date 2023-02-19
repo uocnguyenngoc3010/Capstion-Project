@@ -9,6 +9,7 @@
         public string Phone { get; set; }
         public string AuthToken { get; set; }
         public string IdToken { get; set; }
+        public string Role { get; set; }
         public int? Status { get; set; }
     }
 }

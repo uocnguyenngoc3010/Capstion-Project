@@ -1,5 +1,6 @@
 ﻿using FamilyEventt.Dto;
 using FamilyEventt.Interfaces;
+using FamilyEventt.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FamilyEventt.Controllers
@@ -18,7 +19,7 @@ namespace FamilyEventt.Controllers
         public async Task<IActionResult> GetAll()
         {
 
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<Location>> responseAPI = new ResponseAPI<List<Location>>();
             try
             {
                 responseAPI.Data = await this._locationService.GetAllLocations();
@@ -35,7 +36,7 @@ namespace FamilyEventt.Controllers
         [HttpPost]
         public async Task<IActionResult> InsertLocation(LocationDto location)
         {
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<Location>> responseAPI = new ResponseAPI<List<Location>>();
             try
             {
                 responseAPI.Data = await this._locationService.InsertLocation(location);
@@ -51,7 +52,7 @@ namespace FamilyEventt.Controllers
         [HttpGet]
         public async Task<IActionResult> SearchNameLocation(string name)
         {
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<Location>> responseAPI = new ResponseAPI<List<Location>>();
             try
             {
                 responseAPI.Data = await this._locationService.SearchByNameLocations(name);
@@ -67,7 +68,7 @@ namespace FamilyEventt.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateLocation(LocationDto upLocation)
         {
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<Location>> responseAPI = new ResponseAPI<List<Location>>();
             try
             {
                 responseAPI.Data = await this._locationService.UpdateLocation(upLocation);
@@ -83,7 +84,7 @@ namespace FamilyEventt.Controllers
         [HttpPut]
         public async Task<IActionResult> DeleteLocation(int id)
         {
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<Location>> responseAPI = new ResponseAPI<List<Location>>();
             try
             {
                 responseAPI.Data = await this._locationService.DeleteLocation(id);

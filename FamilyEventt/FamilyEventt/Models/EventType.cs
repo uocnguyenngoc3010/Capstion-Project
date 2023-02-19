@@ -10,7 +10,6 @@ namespace FamilyEventt.Models
         public EventType()
         {
             Event = new HashSet<Event>();
-            Script = new HashSet<Script>();
         }
 
         public int EventTypeId { get; set; }
@@ -19,6 +18,5 @@ namespace FamilyEventt.Models
         public string Description { get; set; }
 
         public virtual ICollection<Event> Event { get; set; }
-        public virtual ICollection<Script> Script { get; set; }
     }
 }

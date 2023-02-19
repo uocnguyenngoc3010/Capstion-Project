@@ -7,7 +7,6 @@ namespace FamilyEventt.Models
 {
     public partial class Location
     {
-        public int RoomId { get; set; }
         public int LocationId { get; set; }
         public string Type { get; set; }
         public string Name { get; set; }
@@ -15,5 +14,6 @@ namespace FamilyEventt.Models
         public string Image { get; set; }
         public int QuantityParticipants { get; set; }
         public bool Status { get; set; }
+        public int RoomId { get; set; }
     }
 }

@@ -10,17 +10,16 @@ namespace FamilyEventt.Models
         public Room()
         {
             DateTimeLocation = new HashSet<DateTimeLocation>();
-            Event = new HashSet<Event>();
         }
 
         public int RoomId { get; set; }
         public string Name { get; set; }
-        public int Quantity { get; set; }
+        public int Parking { get; set; }
+        public int Capacity { get; set; }
         public bool Status { get; set; }
         public byte[] Image { get; set; }
         public string Description { get; set; }
 
         public virtual ICollection<DateTimeLocation> DateTimeLocation { get; set; }
-        public virtual ICollection<Event> Event { get; set; }
     }
 }

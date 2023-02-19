@@ -14,6 +14,5 @@ namespace FamilyEventt.Models
 
         public virtual Event Event { get; set; }
         public virtual Room Room { get; set; }
-        public virtual DateTimeLocationStatus StatusNavigation { get; set; }
     }
 }

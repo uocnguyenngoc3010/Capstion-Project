@@ -1,0 +1,45 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "restored": true,
+      "restoreTime": "2023-02-18T06:53:40.3455839Z"
+    }
+  },
+  "parameters": {
+    "mssql1.subscriptionId": {
+      "Name": "mssql1.subscriptionId",
+      "Type": "subscription",
+      "Value": "34fe4310-4d50-4d33-a172-46f1632b5386"
+    },
+    "FamilyEventtMgmtApi.resourceName": {
+      "Name": "FamilyEventtMgmtApi.resourceName",
+      "Type": null,
+      "Value": "FamilyEventtMgmtApi"
+    },
+    "mssql1.resourceGroupName": {
+      "Name": "mssql1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "FamilyEventt20230212151453ResourceGroup"
+    },
+    "subscriptionId": {
+      "Name": "subscriptionId",
+      "Type": "subscription",
+      "Value": "34fe4310-4d50-4d33-a172-46f1632b5386"
+    },
+    "FamilyEventtMgmtApi.resourceGroupName": {
+      "Name": "FamilyEventtMgmtApi.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "FamilyEventt20230212151453ResourceGroup"
+    },
+    "FamilyEventtMgmtApi.resourceGroupLocation": {
+      "Name": "FamilyEventtMgmtApi.resourceGroupLocation",
+      "Type": null,
+      "Value": "eastus"
+    },
+    "FamilyEventtMgmtApi.subscriptionId": {
+      "Name": "FamilyEventtMgmtApi.subscriptionId",
+      "Type": "subscription",
+      "Value": "34fe4310-4d50-4d33-a172-46f1632b5386"
+    }
+  }
+}

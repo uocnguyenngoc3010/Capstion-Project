@@ -1,5 +1,6 @@
 ﻿using FamilyEventt.Dto;
 using FamilyEventt.Interfaces;
+using FamilyEventt.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FamilyEventt.Controllers
@@ -18,7 +19,7 @@ namespace FamilyEventt.Controllers
         public async Task <IActionResult> GetAll()
         {
 
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<Show>> responseAPI = new ResponseAPI<List<Show>>();
             try
             {
                 responseAPI.Data =await this._showService.GetAllShows();
@@ -35,7 +36,7 @@ namespace FamilyEventt.Controllers
         [HttpPost]
         public async Task <IActionResult> InsertShow(ShowDto show)
         {
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<Show>> responseAPI = new ResponseAPI<List<Show>>();
             try
             {
                 responseAPI.Data =await this._showService.InsertShow(show);
@@ -51,7 +52,7 @@ namespace FamilyEventt.Controllers
         [HttpGet]
         public async Task <IActionResult> SearchNameShows(string name)
         {
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<Show>> responseAPI = new ResponseAPI<List<Show>>();
             try
             {
                 responseAPI.Data =await this._showService.SearchByNameShows(name);
@@ -67,7 +68,7 @@ namespace FamilyEventt.Controllers
         [HttpPut]
         public async Task <IActionResult> UpdateShow(ShowDto upShow)
         {
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<Show>> responseAPI = new ResponseAPI<List<Show>>();
             try
             {
                 responseAPI.Data =await this._showService.UpdateShow(upShow);
@@ -83,7 +84,7 @@ namespace FamilyEventt.Controllers
         [HttpPut]
         public async Task <IActionResult> DeleteShow(int id)
         {
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<Show>> responseAPI = new ResponseAPI<List<Show>>();
             try
             {
                 responseAPI.Data =await this._showService.DeleteShow(id);

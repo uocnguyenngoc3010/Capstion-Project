@@ -23,9 +23,10 @@ namespace FamilyEventt.Services
             [Required]
             public string IdToken { get; set; }
         }
-        public string GenerateJSONWebToken(Account account)
-        {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+
+        //public string GenerateJSONWebToken(Account account)
+        //{
+            /*var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
             var claims = new[]
@@ -42,8 +43,8 @@ namespace FamilyEventt.Services
               expires: DateTime.Now.AddMinutes(120),
               signingCredentials: credentials);
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
-        }
+            return new JwtSecurityTokenHandler().WriteToken(token);*/
+      //  }
 
 
     }

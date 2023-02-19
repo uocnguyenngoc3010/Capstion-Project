@@ -19,10 +19,8 @@ namespace FamilyEventt.Models
         }
 
         public virtual DbSet<Account> Account { get; set; }
-        public virtual DbSet<BookingRecord> BookingRecord { get; set; }
         public virtual DbSet<ChatMessage> ChatMessage { get; set; }
         public virtual DbSet<DateTimeLocation> DateTimeLocation { get; set; }
-        public virtual DbSet<DateTimeLocationStatus> DateTimeLocationStatus { get; set; }
         public virtual DbSet<Decoration> Decoration { get; set; }
         public virtual DbSet<DecorationProduct> DecorationProduct { get; set; }
         public virtual DbSet<Drink> Drink { get; set; }
@@ -30,7 +28,6 @@ namespace FamilyEventt.Models
         public virtual DbSet<EntertainmentProduct> EntertainmentProduct { get; set; }
         public virtual DbSet<Event> Event { get; set; }
         public virtual DbSet<EventBooker> EventBooker { get; set; }
-        public virtual DbSet<EventOrder> EventOrder { get; set; }
         public virtual DbSet<EventType> EventType { get; set; }
         public virtual DbSet<Feedback> Feedback { get; set; }
         public virtual DbSet<Food> Food { get; set; }
@@ -42,42 +39,36 @@ namespace FamilyEventt.Models
         public virtual DbSet<MenuProduct> MenuProduct { get; set; }
         public virtual DbSet<Payment> Payment { get; set; }
         public virtual DbSet<Product> Product { get; set; }
-        public virtual DbSet<Refund> Refund { get; set; }
-        public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<Room> Room { get; set; }
         public virtual DbSet<Script> Script { get; set; }
         public virtual DbSet<Show> Show { get; set; }
-        public virtual DbSet<Staff> Staff { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Account>(entity =>
             {
-                entity.HasNoKey();
+                entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.Email).HasMaxLength(50);
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
-                entity.Property(e => e.Password).HasMaxLength(50);
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
-                entity.Property(e => e.Phone).HasMaxLength(11);
+                entity.Property(e => e.Role)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
-                entity.Property(e => e.UserName).HasMaxLength(50);
-            });
-
-            modelBuilder.Entity<BookingRecord>(entity =>
-            {
-                entity.Property(e => e.BookingRecordId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("BookingRecordID");
+                entity.Property(e => e.Username).HasMaxLength(50);
             });
 
             modelBuilder.Entity<ChatMessage>(entity =>
             {
                 entity.HasKey(e => e.ChatId);
 
-                entity.Property(e => e.ChatId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("ChatID");
+                entity.Property(e => e.ChatId).HasColumnName("ChatID");
 
                 entity.Property(e => e.Date).HasColumnType("date");
 
@@ -115,36 +106,11 @@ namespace FamilyEventt.Models
                     .HasForeignKey(d => d.RoomId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_DateTimeLocation_Room");
-
-                entity.HasOne(d => d.StatusNavigation)
-                    .WithMany(p => p.DateTimeLocation)
-                    .HasForeignKey(d => d.Status)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_DateTimeLocation_DateTimeLocationStatus");
-            });
-
-            modelBuilder.Entity<DateTimeLocationStatus>(entity =>
-            {
-                entity.HasKey(e => e.StatusId);
-
-                entity.Property(e => e.StatusId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("StatusID");
-
-                entity.Property(e => e.StatusName)
-                    .IsRequired()
-                    .HasMaxLength(50);
             });
 
             modelBuilder.Entity<Decoration>(entity =>
             {
-                entity.Property(e => e.DecorationId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("DecorationID");
-
-                entity.Property(e => e.Combo)
-                    .IsRequired()
-                    .HasMaxLength(50);
+                entity.Property(e => e.DecorationId).HasColumnName("DecorationID");
 
                 entity.Property(e => e.Image).IsRequired();
 
@@ -182,32 +148,22 @@ namespace FamilyEventt.Models
             {
                 entity.HasKey(e => e.ProductId);
 
-                entity.Property(e => e.ProductId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("ProductID");
+                entity.Property(e => e.ProductId).HasColumnName("ProductID");
 
                 entity.Property(e => e.Image).IsRequired();
 
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(50);
+
+                entity.Property(e => e.Price).HasColumnType("money");
             });
 
             modelBuilder.Entity<Entertainment>(entity =>
             {
-                entity.Property(e => e.EntertainmentId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("EntertainmentID");
-
-                entity.Property(e => e.EventId).HasColumnName("EventID");
+                entity.Property(e => e.EntertainmentId).HasColumnName("EntertainmentID");
 
                 entity.Property(e => e.Total).HasColumnType("money");
-
-                entity.HasOne(d => d.Event)
-                    .WithMany(p => p.Entertainment)
-                    .HasForeignKey(d => d.EventId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Entertainment_Event");
             });
 
             modelBuilder.Entity<EntertainmentProduct>(entity =>
@@ -242,19 +198,29 @@ namespace FamilyEventt.Models
 
             modelBuilder.Entity<Event>(entity =>
             {
-                entity.Property(e => e.EventId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("EventID");
+                entity.Property(e => e.EventId).HasColumnName("EventID");
 
                 entity.Property(e => e.DecorationId).HasColumnName("DecorationID");
 
+                entity.Property(e => e.EndDate).HasColumnType("date");
+
+                entity.Property(e => e.EntertainmentId).HasColumnName("EntertainmentID");
+
+                entity.Property(e => e.EventBookerId).HasColumnName("EventBookerID");
+
                 entity.Property(e => e.EventTypeId).HasColumnName("EventTypeID");
 
-                entity.Property(e => e.OrderId).HasColumnName("OrderID");
+                entity.Property(e => e.MenuId).HasColumnName("MenuID");
 
-                entity.Property(e => e.RoomId).HasColumnName("RoomID");
+                entity.Property(e => e.OrganizedPerson)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.ScriptId).HasColumnName("ScriptID");
+
+                entity.Property(e => e.StartDate).HasColumnType("date");
+
+                entity.Property(e => e.TotalPrice).HasColumnType("money");
 
                 entity.HasOne(d => d.Decoration)
                     .WithMany(p => p.Event)
@@ -262,23 +228,29 @@ namespace FamilyEventt.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Event_Decoration");
 
+                entity.HasOne(d => d.Entertainment)
+                    .WithMany(p => p.Event)
+                    .HasForeignKey(d => d.EntertainmentId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Event_Entertainment");
+
+                entity.HasOne(d => d.EventBooker)
+                    .WithMany(p => p.Event)
+                    .HasForeignKey(d => d.EventBookerId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Event_EventBooker");
+
                 entity.HasOne(d => d.EventType)
                     .WithMany(p => p.Event)
                     .HasForeignKey(d => d.EventTypeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Event_EventType");
 
-                entity.HasOne(d => d.Order)
+                entity.HasOne(d => d.Menu)
                     .WithMany(p => p.Event)
-                    .HasForeignKey(d => d.OrderId)
+                    .HasForeignKey(d => d.MenuId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Event_EventOrder");
-
-                entity.HasOne(d => d.Room)
-                    .WithMany(p => p.Event)
-                    .HasForeignKey(d => d.RoomId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Event_Room");
+                    .HasConstraintName("FK_Event_Menu");
 
                 entity.HasOne(d => d.Script)
                     .WithMany(p => p.Event)
@@ -289,57 +261,26 @@ namespace FamilyEventt.Models
 
             modelBuilder.Entity<EventBooker>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("ID");
 
                 entity.Property(e => e.DateOfBirth).HasColumnType("date");
 
                 entity.Property(e => e.Fullname)
                     .IsRequired()
                     .HasMaxLength(50);
-            });
 
-            modelBuilder.Entity<EventOrder>(entity =>
-            {
-                entity.HasKey(e => e.OrderId);
-
-                entity.Property(e => e.OrderId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("OrderID");
-
-                entity.Property(e => e.BookingRecordId).HasColumnName("BookingRecordID");
-
-                entity.Property(e => e.Date).HasColumnType("date");
-
-                entity.Property(e => e.EventBookerId).HasColumnName("EventBookerID");
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.Payment).IsRequired();
-
-                entity.Property(e => e.PriceUnit).HasColumnType("money");
-
-                entity.Property(e => e.TotalPrice).HasColumnType("money");
-
-                entity.HasOne(d => d.BookingRecord)
-                    .WithMany(p => p.EventOrder)
-                    .HasForeignKey(d => d.BookingRecordId)
+                entity.HasOne(d => d.IdNavigation)
+                    .WithOne(p => p.EventBooker)
+                    .HasForeignKey<EventBooker>(d => d.Id)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_EventOrder_BookingRecord");
-
-                entity.HasOne(d => d.EventBooker)
-                    .WithMany(p => p.EventOrder)
-                    .HasForeignKey(d => d.EventBookerId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_EventOrder_EventBooker");
+                    .HasConstraintName("FK_EventBooker_Account");
             });
 
             modelBuilder.Entity<EventType>(entity =>
             {
-                entity.Property(e => e.EventTypeId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("EventTypeID");
+                entity.Property(e => e.EventTypeId).HasColumnName("EventTypeID");
 
                 entity.Property(e => e.Image).IsRequired();
 
@@ -367,9 +308,7 @@ namespace FamilyEventt.Models
             {
                 entity.HasKey(e => e.ProductId);
 
-                entity.Property(e => e.ProductId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("ProductID");
+                entity.Property(e => e.ProductId).HasColumnName("ProductID");
 
                 entity.Property(e => e.Dish)
                     .IsRequired()
@@ -394,9 +333,7 @@ namespace FamilyEventt.Models
 
             modelBuilder.Entity<FoodType>(entity =>
             {
-                entity.Property(e => e.FoodTypeId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("FoodTypeID");
+                entity.Property(e => e.FoodTypeId).HasColumnName("FoodTypeID");
 
                 entity.Property(e => e.Detail).IsRequired();
 
@@ -407,9 +344,7 @@ namespace FamilyEventt.Models
 
             modelBuilder.Entity<Game>(entity =>
             {
-                entity.Property(e => e.GameId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("GameID");
+                entity.Property(e => e.GameId).HasColumnName("GameID");
 
                 entity.Property(e => e.Details).IsRequired();
 
@@ -453,19 +388,13 @@ namespace FamilyEventt.Models
 
             modelBuilder.Entity<Menu>(entity =>
             {
-                entity.Property(e => e.MenuId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("MenuID");
+                entity.Property(e => e.MenuId).HasColumnName("MenuID");
 
-                entity.Property(e => e.EventId).HasColumnName("EventID");
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.PriceTotal).HasColumnType("money");
-
-                entity.HasOne(d => d.Event)
-                    .WithMany(p => p.Menu)
-                    .HasForeignKey(d => d.EventId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Menu_Event");
             });
 
             modelBuilder.Entity<MenuDrink>(entity =>
@@ -475,6 +404,8 @@ namespace FamilyEventt.Models
                 entity.Property(e => e.MenuId).HasColumnName("MenuID");
 
                 entity.Property(e => e.DrinkId).HasColumnName("DrinkID");
+
+                entity.Property(e => e.Price).HasColumnType("money");
 
                 entity.HasOne(d => d.Drink)
                     .WithMany(p => p.MenuDrink)
@@ -519,32 +450,30 @@ namespace FamilyEventt.Models
 
             modelBuilder.Entity<Payment>(entity =>
             {
-                entity.Property(e => e.PaymentId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("PaymentID");
+                entity.Property(e => e.PaymentId).HasColumnName("PaymentID");
 
                 entity.Property(e => e.Amount).HasColumnType("money");
 
                 entity.Property(e => e.Date).HasColumnType("datetime");
 
-                entity.Property(e => e.EventOrderId).HasColumnName("EventOrderID");
+                entity.Property(e => e.EventId).HasColumnName("EventID");
 
-                entity.HasOne(d => d.EventOrder)
-                    .WithMany(p => p.PaymentNavigation)
-                    .HasForeignKey(d => d.EventOrderId)
+                entity.Property(e => e.PayContent)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.HasOne(d => d.Event)
+                    .WithMany(p => p.Payment)
+                    .HasForeignKey(d => d.EventId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Payment_EventOrder");
+                    .HasConstraintName("FK_Payment_Event");
             });
 
             modelBuilder.Entity<Product>(entity =>
             {
-                entity.Property(e => e.ProductId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("ProductID");
+                entity.Property(e => e.ProductId).HasColumnName("ProductID");
 
                 entity.Property(e => e.Details).IsRequired();
-
-                entity.Property(e => e.Image).IsRequired();
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -557,43 +486,9 @@ namespace FamilyEventt.Models
                     .HasMaxLength(50);
             });
 
-            modelBuilder.Entity<Refund>(entity =>
-            {
-                entity.Property(e => e.RefundId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("RefundID");
-
-                entity.Property(e => e.Amount).HasColumnType("money");
-
-                entity.Property(e => e.Date).HasColumnType("date");
-
-                entity.Property(e => e.PaymentId).HasColumnName("PaymentID");
-
-                entity.HasOne(d => d.Payment)
-                    .WithMany(p => p.Refund)
-                    .HasForeignKey(d => d.PaymentId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Refund_Payment");
-            });
-
-            modelBuilder.Entity<Role>(entity =>
-            {
-                entity.Property(e => e.RoleId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("RoleID");
-
-                entity.Property(e => e.Description).IsRequired();
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(50);
-            });
-
             modelBuilder.Entity<Room>(entity =>
             {
-                entity.Property(e => e.RoomId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("RoomID");
+                entity.Property(e => e.RoomId).HasColumnName("RoomID");
 
                 entity.Property(e => e.Description)
                     .IsRequired()
@@ -611,32 +506,22 @@ namespace FamilyEventt.Models
 
             modelBuilder.Entity<Script>(entity =>
             {
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(50);
 
                 entity.Property(e => e.ScriptContent).IsRequired();
-
-                entity.HasOne(d => d.EventTypeNavigation)
-                    .WithMany(p => p.Script)
-                    .HasForeignKey(d => d.EventType)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Script_EventType");
             });
 
             modelBuilder.Entity<Show>(entity =>
             {
-                entity.Property(e => e.ShowId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("ShowID");
+                entity.Property(e => e.ShowId).HasColumnName("ShowID");
 
                 entity.Property(e => e.Description)
                     .IsRequired()
-                    .HasMaxLength(50);
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.Image).IsRequired();
 
@@ -657,19 +542,6 @@ namespace FamilyEventt.Models
                 entity.Property(e => e.Sound)
                     .IsRequired()
                     .HasMaxLength(50);
-            });
-
-            modelBuilder.Entity<Staff>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.RoleId).HasColumnName("RoleID");
-
-                entity.HasOne(d => d.Role)
-                    .WithMany(p => p.Staff)
-                    .HasForeignKey(d => d.RoleId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Staff_Role");
             });
 
             OnModelCreatingPartial(modelBuilder);

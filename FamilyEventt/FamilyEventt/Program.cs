@@ -8,10 +8,11 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddDbContext<FamilyEventContext>(options=>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection1"))
     );
 //Khai báo 
 builder.Services.AddScoped<IDrink, DrinkService>();
@@ -21,6 +22,7 @@ builder.Services.AddScoped<IShow, ShowService>();
 builder.Services.AddScoped<IFoodType, FoodTypeService>();
 builder.Services.AddScoped<ILocation, LocationService>();
 builder.Services.AddScoped<IEventBooker, EventBookerService>();
+builder.Services.AddScoped<IFood, FoodService>();
 builder.Services.AddScoped<IAccount, AccountService>();
 
 
@@ -46,7 +48,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "FamilyEventApi v1"));
 }
 
 // Configure the HTTP request pipeline.
@@ -57,9 +59,18 @@ if (app.Environment.IsDevelopment())
 //    app.UseHsts();
 //}
 
+app.UseSwagger();
+app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "FamilyEventApi v1"));
+
 app.UseHttpsRedirection();
 
 app.UseRouting();
+
+app.UseCors(x => x
+
+                                            .AllowAnyOrigin()
+                                            .AllowAnyHeader()
+                                            .AllowAnyMethod());
 
 app.UseAuthentication();
 //app.UseAuthorization();

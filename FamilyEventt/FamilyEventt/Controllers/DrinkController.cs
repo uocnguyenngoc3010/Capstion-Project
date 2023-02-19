@@ -19,8 +19,7 @@ namespace FamilyEventt.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-             
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<Drink>> responseAPI = new ResponseAPI<List<Drink>>();
             try
             {
                 responseAPI.Data = await this._drinkService.GetAllDrinks();
@@ -33,11 +32,11 @@ namespace FamilyEventt.Controllers
             }
         }
 
-        [Route("insert-drink/{drink}")]
+        [Route("insert-drink/")]
         [HttpPost]
         public async Task <IActionResult>  InsertDrink(DrinkDto drink)
         {
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<Drink>> responseAPI = new ResponseAPI<List<Drink>>();
             try
             {
                 responseAPI.Data = await this._drinkService.InsertDrink(drink);
@@ -49,11 +48,12 @@ namespace FamilyEventt.Controllers
                 return BadRequest(responseAPI);
             }
         }
+
         [Route("search-by-name-drink/{name}")]
         [HttpGet]
         public async Task <IActionResult>  SearchNameDrink(string name)
         {
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<Drink>> responseAPI = new ResponseAPI<List<Drink>>();
             try
             {
                 responseAPI.Data = await this._drinkService.SearchByNameDrinks(name);
@@ -69,7 +69,7 @@ namespace FamilyEventt.Controllers
         [HttpPut]
         public async Task <IActionResult>  UpdateDrink(DrinkDto upDrink)
         {
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<Drink>> responseAPI = new ResponseAPI<List<Drink>>();
             try
             {
                 responseAPI.Data = await this._drinkService.UpdateDrink(upDrink);
@@ -85,7 +85,7 @@ namespace FamilyEventt.Controllers
         [HttpDelete]
         public async Task <IActionResult>  DeleteDrink(int id)
         {
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<Drink>> responseAPI = new ResponseAPI<List<Drink>>();
             try
             {
                 responseAPI.Data = await this._drinkService.DeleteDrink(id);

@@ -1,5 +1,6 @@
 ﻿using FamilyEventt.Dto;
 using FamilyEventt.Interfaces;
+using FamilyEventt.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FamilyEventt.Controllers
@@ -16,7 +17,7 @@ namespace FamilyEventt.Controllers
         public async Task  <IActionResult> GetAll()
         {
 
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<Product>> responseAPI = new ResponseAPI<List<Product>>();
             try
             {
                 responseAPI.Data =await this._productService.GetAllProducts();
@@ -32,7 +33,7 @@ namespace FamilyEventt.Controllers
         [HttpGet]
         public async Task <IActionResult> SearchNameProduct(string name)
         {
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<Product>> responseAPI = new ResponseAPI<List<Product>>();
             try
             {
                 responseAPI.Data =await this._productService.SearchByNameProducts(name);
@@ -48,7 +49,7 @@ namespace FamilyEventt.Controllers
         [HttpPost]
         public async Task <IActionResult> InsertProduct(ProductDto iProduct)
         {
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<Product>> responseAPI = new ResponseAPI<List<Product>>();
             try
             {
                 responseAPI.Data = await this._productService.InsertProduct(iProduct);
@@ -64,7 +65,7 @@ namespace FamilyEventt.Controllers
         [HttpPut]
         public async Task <IActionResult> DeleteProduct(int id)
         {
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<Product>> responseAPI = new ResponseAPI<List<Product>>();
             try
             {
                 responseAPI.Data = await this._productService.DeleteProduct(id);
@@ -80,7 +81,7 @@ namespace FamilyEventt.Controllers
         [HttpPut]
         public async Task <IActionResult> UpdateProduct(ProductDto upProduct)
         {
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<Product>> responseAPI = new ResponseAPI<List<Product>>();
             try
             {
                 responseAPI.Data =await this._productService.UpdateProduct(upProduct);

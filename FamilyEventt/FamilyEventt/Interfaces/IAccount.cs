@@ -1,4 +1,6 @@
-﻿namespace FamilyEventt.Interfaces
+﻿using FamilyEventt.Models;
+
+namespace FamilyEventt.Interfaces
 {
     public interface IAccount
     {

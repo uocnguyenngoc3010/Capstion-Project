@@ -1,5 +1,6 @@
 ﻿using FamilyEventt.Dto;
 using FamilyEventt.Interfaces;
+using FamilyEventt.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FamilyEventt.Controllers
@@ -18,7 +19,7 @@ namespace FamilyEventt.Controllers
         public async Task<IActionResult> GetAll()
         {
 
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<EventBooker>> responseAPI = new ResponseAPI<List<EventBooker>>();
             try
             {
                 responseAPI.Data = await this._eventBookerService.GetAllEventBookers();
@@ -35,7 +36,7 @@ namespace FamilyEventt.Controllers
         [HttpPost]
         public async Task<IActionResult> InsertEventBooker([FromBody] EventBookerDto eventBooker)
         {
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<EventBooker>> responseAPI = new ResponseAPI<List<EventBooker>>();
             try
             {
                 responseAPI.Data = await this._eventBookerService.InsertEventBooker(eventBooker);
@@ -51,7 +52,7 @@ namespace FamilyEventt.Controllers
         [HttpGet]
         public async Task<IActionResult> SearchNameEventBooker(string name)
         {
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<EventBooker>> responseAPI = new ResponseAPI<List<EventBooker>>();
             try
             {
                 responseAPI.Data = await this._eventBookerService.SearchByNameEventBooker(name);
@@ -67,7 +68,7 @@ namespace FamilyEventt.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateEventBooker(EventBookerDto upEventBooker)
         {
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<EventBooker>> responseAPI = new ResponseAPI<List<EventBooker>>();
             try
             {
                 responseAPI.Data = await this._eventBookerService.UpdateEventBooker(upEventBooker);
@@ -84,7 +85,7 @@ namespace FamilyEventt.Controllers
         [HttpPut]
         public async Task<IActionResult> DeleteEventBooker(int id)
         {
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<EventBooker>> responseAPI = new ResponseAPI<List<EventBooker>>();
             try
             {
                 responseAPI.Data = await this._eventBookerService.DeleteEventBooker(id);

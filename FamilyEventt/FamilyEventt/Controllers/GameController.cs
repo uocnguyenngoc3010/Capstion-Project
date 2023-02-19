@@ -1,5 +1,6 @@
 ﻿using FamilyEventt.Dto;
 using FamilyEventt.Interfaces;
+using FamilyEventt.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FamilyEventt.Controllers
@@ -18,7 +19,7 @@ namespace FamilyEventt.Controllers
         public async Task <IActionResult> GetAll()
         {
 
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<Game>> responseAPI = new ResponseAPI<List<Game>>();
             try
             {
                 responseAPI.Data =await this._gameService.GetAllGames();
@@ -34,7 +35,7 @@ namespace FamilyEventt.Controllers
         [HttpGet]
         public async Task <IActionResult> SearchByNameGames(string name)
         {
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<Game>> responseAPI = new ResponseAPI<List<Game>>();
             try
             {
                 responseAPI.Data =await this._gameService.SearchByNameGames(name);
@@ -50,7 +51,7 @@ namespace FamilyEventt.Controllers
         [HttpPut]
         public async Task <IActionResult> UpdateGame(GameDto upGame)
         {
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<Game>> responseAPI = new ResponseAPI<List<Game>>();
             try
             {
                 responseAPI.Data =await this._gameService.UpdateGame(upGame);
@@ -66,7 +67,7 @@ namespace FamilyEventt.Controllers
         [HttpPost]
         public async Task <IActionResult> InsertDrink(GameDto game)
         {
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<Game>> responseAPI = new ResponseAPI<List<Game>>();
             try
             {
                 responseAPI.Data =await this._gameService.InsertGame(game);
@@ -82,7 +83,7 @@ namespace FamilyEventt.Controllers
         [HttpPut]
         public async Task <IActionResult> DeleteGame(int id)
         {
-            ResponseAPI responseAPI = new ResponseAPI();
+            ResponseAPI<List<Game>> responseAPI = new ResponseAPI<List<Game>>();
             try
             {
                 responseAPI.Data =await this._gameService.DeleteGame(id);

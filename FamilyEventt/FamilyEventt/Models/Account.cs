@@ -7,13 +7,14 @@ namespace FamilyEventt.Models
 {
     public partial class Account
     {
-        public int? Id { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
+        public int Id { get; set; }
+        public string Username { get; set; }
         public string Email { get; set; }
-        public string Phone { get; set; }
-        public int? Status { get; set; }
-        //public string AuthToken { get; set; }
-        //public string IdToken { get; set; }
+        public double Phone { get; set; }
+        public string Password { get; set; }
+        public string Role { get; set; }
+        public bool Status { get; set; }
+
+        public virtual EventBooker EventBooker { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace FamilyEventt.Models
 {
-    public partial class DecorationProduct
+    public class DecorationProduct
     {
         public int DecorationId { get; set; }
         public int ProductId { get; set; }
@@ -14,5 +14,7 @@ namespace FamilyEventt.Models
 
         public virtual Decoration Decoration { get; set; }
         public virtual Product Product { get; set; }
+
+
     }
 }

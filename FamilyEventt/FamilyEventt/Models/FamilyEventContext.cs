@@ -142,17 +142,17 @@ namespace FamilyEventt.Models
                     .ValueGeneratedNever()
                     .HasColumnName("DecorationID");
 
-                entity.Property(e => e.Combo)
+                //entity.Property(e => e.Combo)
+                //    .IsRequired()
+                //    .HasMaxLength(50);
+
+                entity.Property(e => e.DecorationImage).IsRequired();
+
+                entity.Property(e => e.DecorationName)
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.Image).IsRequired();
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.Price).HasColumnType("money");
+                entity.Property(e => e.DecorationPrice).HasColumnType("money");
             });
 
             modelBuilder.Entity<DecorationProduct>(entity =>
@@ -542,17 +542,17 @@ namespace FamilyEventt.Models
                     .ValueGeneratedNever()
                     .HasColumnName("ProductID");
 
-                entity.Property(e => e.Details).IsRequired();
+                entity.Property(e => e.ProductDetails).IsRequired();
 
-                entity.Property(e => e.Image).IsRequired();
+                //entity.Property(e => e.ProductImage).IsRequired();
 
-                entity.Property(e => e.Name)
+                entity.Property(e => e.DecorationProductName)
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.Property(e => e.Price).HasColumnType("money");
+                entity.Property(e => e.ProductPrice).HasColumnType("money");
 
-                entity.Property(e => e.Supplier)
+                entity.Property(e => e.ProductSupplier)
                     .IsRequired()
                     .HasMaxLength(50);
             });

@@ -22,6 +22,7 @@ builder.Services.AddScoped<IFoodType, FoodTypeService>();
 builder.Services.AddScoped<ILocation, LocationService>();
 builder.Services.AddScoped<IEventBooker, EventBookerService>();
 builder.Services.AddScoped<IAccount, AccountService>();
+builder.Services.AddScoped<IDecorationProduct, DecorationProductService>();
 
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(Options =>

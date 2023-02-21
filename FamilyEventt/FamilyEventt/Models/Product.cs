@@ -13,12 +13,12 @@ namespace FamilyEventt.Models
         }
 
         public int ProductId { get; set; }
-        public string Name { get; set; }
-        public decimal Price { get; set; }
-        public int Quantity { get; set; }
-        public string Details { get; set; }
-        public string Image { get; set; }
-        public string Supplier { get; set; }
+        public string DecorationProductName { get; set; }
+        public decimal ProductPrice { get; set; }
+        public int ProductQuantity { get; set; }
+        public string ProductDetails { get; set; }
+        public string ProductImage { get; set; }
+        public string ProductSupplier { get; set; }
         public bool Status { get; set; }
 
         public virtual ICollection<DecorationProduct> DecorationProduct { get; set; }

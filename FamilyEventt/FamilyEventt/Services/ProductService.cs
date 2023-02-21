@@ -58,12 +58,12 @@ namespace FamilyEventt.Services
                 var _product = new Product();
                 _product.ProductId = iProduct.ProductId;
                 _product.Status = iProduct.Status;
-                _product.Name = iProduct.Name;
-                _product.Price = iProduct.Price;
-                _product.Quantity = iProduct.Quantity;
-                _product.Details = iProduct.Details;
-                _product.Image = iProduct.Image;
-                _product.Supplier = iProduct.Supplier;
+                _product.DecorationProductName = iProduct.DecorationProductName;
+                _product.ProductPrice = iProduct.ProductPrice;
+                _product.ProductQuantity = iProduct.ProductQuantity;
+                _product.ProductDetails = iProduct.ProductDetails;
+                _product.ProductImage = iProduct.ProductImage;
+                _product.ProductSupplier = iProduct.ProductSupplier;
                 _product.Status = iProduct.Status;
                 await this.context.Product.AddAsync(_product);
                 this.context.SaveChanges();
@@ -80,7 +80,7 @@ namespace FamilyEventt.Services
         {
              try
              {
-                var data =await this.context.Product.Where(x => x.Status && x.Name.Contains(name)).ToListAsync();
+                var data =await this.context.Product.Where(x => x.Status && x.DecorationProductName.Contains(name)).ToListAsync();
                 return data;
              }
             catch (Exception ex)
@@ -96,12 +96,12 @@ namespace FamilyEventt.Services
                 Product product =await this.context.Product.FirstOrDefaultAsync(x => x.ProductId == upProduct.ProductId);
                 if (product != null)
                 {
-                    product.Name = upProduct.Name;
-                    product.Price = upProduct.Price;
-                    product.Quantity = upProduct.Quantity;
-                    product.Details = upProduct.Details;
-                    product.Image = upProduct.Image;
-                    product.Supplier = upProduct.Supplier;
+                    product.DecorationProductName = upProduct.DecorationProductName;
+                    product.ProductPrice = upProduct.ProductPrice;
+                    product.ProductQuantity = upProduct.ProductQuantity;
+                    product.ProductDetails = upProduct.ProductDetails;
+                    product.ProductImage = upProduct.ProductImage;
+                    product.ProductSupplier = upProduct.ProductSupplier;
                     product.Status = upProduct.Status;
                     this.context.SaveChanges();
                     return true;

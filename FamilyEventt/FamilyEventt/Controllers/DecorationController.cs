@@ -1,21 +1,19 @@
 ﻿using FamilyEventt.Dto;
 using FamilyEventt.Interfaces;
-using FamilyEventt.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FamilyEventt.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DecorationProductController :ControllerBase
+    public class DecorationController: ControllerBase
     {
-        private IDecorationProductService _decorationProduct;
-        public DecorationProductController(IDecorationProductService decorationProduct)
+        IDecorationService _decorationService;
+        public DecorationController(IDecorationService decorationService)
         {
-            this._decorationProduct = decorationProduct;
+            this._decorationService = decorationService;
         }
-        
-        [Route("get-all-decoration-product")]
+        [Route("get-all-decoration")]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -23,7 +21,7 @@ namespace FamilyEventt.Controllers
             ResponseAPI responseAPI = new ResponseAPI();
             try
             {
-                responseAPI.Data = await this._decorationProduct.GetAllDecorationProduct();
+                responseAPI.Data = await this._decorationService.GetAllDecoration();
                 return Ok(responseAPI);
             }
             catch (Exception ex)
@@ -33,16 +31,16 @@ namespace FamilyEventt.Controllers
                 return BadRequest(responseAPI);
             }
         }
-        
-        [Route("get-decoration-product-by-id")]
+
+        [Route("get-decoration-by-id")]
         [HttpGet]
-        public async Task<IActionResult> GetDecorationProductById(int? decorationId, int? productId)
+        public async Task<IActionResult> GetDecorationById(int decorationId)
         {
 
             ResponseAPI responseAPI = new ResponseAPI();
             try
             {
-                responseAPI.Data = await this._decorationProduct.GetDecorationProductById(decorationId, productId);
+                responseAPI.Data = await this._decorationService.GetDecorationById(decorationId);
                 return Ok(responseAPI);
             }
             catch (Exception ex)
@@ -52,16 +50,16 @@ namespace FamilyEventt.Controllers
                 return BadRequest(responseAPI);
             }
         }
-        
-        [Route("filter-decoration-product")]
+
+        [Route("filter-decoration")]
         [HttpGet]
-        public async Task<IActionResult> FilterDecorationProduct(int? decorationId, int? productId, decimal? minPrice, decimal? maxPrice, int? quantity, bool? quantityOption)
+        public async Task<IActionResult> FilterDecoration(string? name, decimal? minPrice, decimal? maxPrice)
         {
 
             ResponseAPI responseAPI = new ResponseAPI();
             try
             {
-                responseAPI.Data = await this._decorationProduct.FilterDecorationProducts(decorationId, productId, minPrice, maxPrice, quantity, quantityOption);
+                responseAPI.Data = await this._decorationService.FilterDecorationBy(name, minPrice, maxPrice);
                 return Ok(responseAPI);
             }
             catch (Exception ex)
@@ -72,15 +70,15 @@ namespace FamilyEventt.Controllers
             }
         }
 
-        [Route("add-decoration-product")]
+        [Route("add-decoration")]
         [HttpPost]
-        public async Task<IActionResult> AddDecorationProduct(DecorationProductDto decorationProductDto)
+        public async Task<IActionResult> AddDecoration(DecorationDto decorationDto)
         {
 
             ResponseAPI responseAPI = new ResponseAPI();
             try
             {
-                responseAPI.Data = await this._decorationProduct.AddDecorationProduct(decorationProductDto);
+                responseAPI.Data = await this._decorationService.AddDecoration(decorationDto);
                 return Ok(responseAPI);
             }
             catch (Exception ex)
@@ -91,15 +89,15 @@ namespace FamilyEventt.Controllers
             }
         }
 
-        [Route("update-decoration-product")]
+        [Route("update-decoration")]
         [HttpPut]
-        public async Task<IActionResult> UpdateDecorationProduct(DecorationProductDto decorationProduct)
+        public async Task<IActionResult> UpdateDecoration(DecorationDto decoration)
         {
 
             ResponseAPI responseAPI = new ResponseAPI();
             try
             {
-                responseAPI.Data = await this._decorationProduct.UpdateDecorationProduct(decorationProduct);
+                responseAPI.Data = await this._decorationService.UpdateDecoration(decoration);
                 return Ok(responseAPI);
             }
             catch (Exception ex)
@@ -110,14 +108,14 @@ namespace FamilyEventt.Controllers
             }
         }
 
-        [Route("delete-decoration-product")]
+        [Route("delete-decoration")]
         [HttpDelete]
-        public async Task<IActionResult> DeleteDecorationProduct(int[] id)
+        public async Task<IActionResult> DeleteDecoration(int[] id)
         {
             ResponseAPI responseAPI = new ResponseAPI();
             try
             {
-                responseAPI.Data = await this._decorationProduct.DeleteDecorationProductById(id);
+                responseAPI.Data = await this._decorationService.DeleteDecorationById(id);
                 return Ok(responseAPI);
             }
             catch (Exception ex)

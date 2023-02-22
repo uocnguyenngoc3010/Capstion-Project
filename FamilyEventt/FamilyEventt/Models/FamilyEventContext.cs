@@ -546,7 +546,7 @@ namespace FamilyEventt.Models
 
                 //entity.Property(e => e.ProductImage).IsRequired();
 
-                entity.Property(e => e.DecorationProductName)
+                entity.Property(e => e.ProductName)
                     .IsRequired()
                     .HasMaxLength(50);
 

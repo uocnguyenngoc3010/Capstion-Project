@@ -58,7 +58,7 @@ namespace FamilyEventt.Services
                 var _product = new Product();
                 _product.ProductId = iProduct.ProductId;
                 _product.Status = iProduct.Status;
-                _product.DecorationProductName = iProduct.DecorationProductName;
+                _product.ProductName = iProduct.ProductName;
                 _product.ProductPrice = iProduct.ProductPrice;
                 _product.ProductQuantity = iProduct.ProductQuantity;
                 _product.ProductDetails = iProduct.ProductDetails;
@@ -80,7 +80,7 @@ namespace FamilyEventt.Services
         {
              try
              {
-                var data =await this.context.Product.Where(x => x.Status && x.DecorationProductName.Contains(name)).ToListAsync();
+                var data =await this.context.Product.Where(x => x.Status && x.ProductName.Contains(name)).ToListAsync();
                 return data;
              }
             catch (Exception ex)
@@ -96,7 +96,7 @@ namespace FamilyEventt.Services
                 Product product =await this.context.Product.FirstOrDefaultAsync(x => x.ProductId == upProduct.ProductId);
                 if (product != null)
                 {
-                    product.DecorationProductName = upProduct.DecorationProductName;
+                    product.ProductName = upProduct.ProductName;
                     product.ProductPrice = upProduct.ProductPrice;
                     product.ProductQuantity = upProduct.ProductQuantity;
                     product.ProductDetails = upProduct.ProductDetails;

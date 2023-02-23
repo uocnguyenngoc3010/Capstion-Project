@@ -32,7 +32,7 @@ namespace FamilyEventt.Interfaces
         /// if quantityOption then get equall and higher; else get equal and lower
         /// </param>
         /// <returns></returns>
-        Task<List<DecorationProductDto>> FilterDecorationProducts(int? decorationId, int? productId,decimal? minPrice, decimal? maxPrice, int? quantity, bool? quantityOption);
+        Task<List<DecorationProductDto>> FilterDecorationProducts(int? decorationId, int? productId,decimal? minPrice, decimal? maxPrice, int? quantity, bool? quantityOption = true);
 
         /// <summary>
         /// Add a decorationProduct
@@ -53,7 +53,7 @@ namespace FamilyEventt.Interfaces
         /// </summary>
         /// <param name="decorationProductId"></param>
         /// <returns></returns>
-        Task<bool> DeleteDecorationProductById(int[] decorationProductId);
+        Task<bool> DeleteDecorationProductById(List<int> decorationProductId);
 
 
     }

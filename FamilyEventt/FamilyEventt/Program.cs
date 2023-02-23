@@ -16,7 +16,7 @@ builder.Services.AddDbContext<FamilyEventContext>(options=>
     );
 //Khai báo 
 builder.Services.AddScoped<IDrink, DrinkService>();
-builder.Services.AddScoped<IProduct, ProductService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IGame, GameService>();
 builder.Services.AddScoped<IShow, ShowService>();
 builder.Services.AddScoped<IFoodType, FoodTypeService>();

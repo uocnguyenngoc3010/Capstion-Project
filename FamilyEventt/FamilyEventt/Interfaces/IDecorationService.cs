@@ -40,7 +40,7 @@ namespace FamilyEventt.Interfaces
         /// </summary>
         /// <param name="decorationIds"></param>
         /// <returns></returns>
-        Task<bool> DeleteDecorationById(int[] decorationIds);
+        Task<bool> DeleteDecorationById(List<int> decorationIds);
 
     }
 }

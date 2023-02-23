@@ -110,7 +110,7 @@ namespace FamilyEventt.Controllers
 
         [Route("delete-decoration")]
         [HttpDelete]
-        public async Task<IActionResult> DeleteDecoration(int[] id)
+        public async Task<IActionResult> DeleteDecoration(List<int> id)
         {
             ResponseAPI responseAPI = new ResponseAPI();
             try

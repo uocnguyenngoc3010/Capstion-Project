@@ -91,15 +91,12 @@ namespace FamilyEventt.Services
         {
             try
             {
-                bool isFilterQuantity;
-                if (quantity == null && quantityOption == null) isFilterQuantity = false;
-                else isFilterQuantity = true;
                 var data = await this.context.DecorationProduct
                     .Where(x => decorationId == null || x.DecorationId == decorationId)
                     .Where(x => productId == null || x.ProductId == productId)
                     .Where(x => minPrice == null || x.Price >= minPrice)
                     .Where(x => maxPrice == null || x.Price <= maxPrice)
-                    .Where(x => !isFilterQuantity || (quantityOption == true ? x.Quantity>= quantity: x.Quantity<= quantity))
+                    .Where(x => quantity == null || (quantityOption == true ? x.Quantity>= quantity: x.Quantity<= quantity))
                     .Select(x => new DecorationProductDto
                     {
                         DecorationId = x.DecorationId,
@@ -181,7 +178,7 @@ namespace FamilyEventt.Services
                 throw new ArgumentException("This DecorationPorduct doesn't exist or Process went wrong");
             }
         }
-        public async Task<bool> DeleteDecorationProductById(int[] decorationProductId)
+        public async Task<bool> DeleteDecorationProductById(List<int> decorationProductId)
         {
             //try
             //{

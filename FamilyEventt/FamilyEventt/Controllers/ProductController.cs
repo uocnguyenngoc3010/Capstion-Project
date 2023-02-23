@@ -6,8 +6,8 @@ namespace FamilyEventt.Controllers
 {
     public class ProductController : ControllerBase
     {
-        private IProduct _productService;
-        public ProductController(IProduct productService)
+        private IProductService _productService;
+        public ProductController(IProductService productService)
         {
             this._productService = productService;
         }
@@ -44,7 +44,7 @@ namespace FamilyEventt.Controllers
                 return BadRequest(responseAPI);
             }
         }
-        [Route("insert-product/{product}")]
+        [Route("insert-product")]
         [HttpPost]
         public async Task <IActionResult> InsertProduct(ProductDto iProduct)
         {
@@ -60,14 +60,14 @@ namespace FamilyEventt.Controllers
                 return BadRequest(responseAPI);
             }
         }
-        [Route("delete-product/{id}")]
+        [Route("delete-product")]
         [HttpPut]
-        public async Task <IActionResult> DeleteProduct(int id)
+        public async Task <IActionResult> DeleteProduct([FromQuery]List<int> id)
         {
             ResponseAPI responseAPI = new ResponseAPI();
             try
             {
-                responseAPI.Data = await this._productService.DeleteProduct(id);
+                    responseAPI.Data = await this._productService.DeleteProduct(id);
                 return Ok(responseAPI);
             }
             catch (Exception ex)
@@ -76,7 +76,7 @@ namespace FamilyEventt.Controllers
                 return BadRequest(responseAPI);
             }
         }
-        [Route("update-product/{Product}")]
+        [Route("update-product")]
         [HttpPut]
         public async Task <IActionResult> UpdateProduct(ProductDto upProduct)
         {
@@ -84,6 +84,22 @@ namespace FamilyEventt.Controllers
             try
             {
                 responseAPI.Data =await this._productService.UpdateProduct(upProduct);
+                return Ok(responseAPI);
+            }
+            catch (Exception ex)
+            {
+                responseAPI.Message = ex.Message;
+                return BadRequest(responseAPI);
+            }
+        }
+        [Route("filter-product")]
+        [HttpGet]
+        public async Task<IActionResult> FilterProduct(string? name, decimal? minPrice, decimal? maxPrice, string? supplier, int? qty, bool? qtyOption = true)
+        {
+            ResponseAPI responseAPI = new ResponseAPI();
+            try
+            {
+                responseAPI.Data = await this._productService.FilterProductByManyOption(name, minPrice, maxPrice, supplier, qty, qtyOption);
                 return Ok(responseAPI);
             }
             catch (Exception ex)

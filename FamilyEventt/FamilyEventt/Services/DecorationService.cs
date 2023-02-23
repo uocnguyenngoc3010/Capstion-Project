@@ -38,7 +38,7 @@ namespace FamilyEventt.Services
             }
         }
 
-        public Task<bool> DeleteDecorationById(int[] decorationIds)
+        public Task<bool> DeleteDecorationById(List<int> decorationIds)
         {
             //try
             //{

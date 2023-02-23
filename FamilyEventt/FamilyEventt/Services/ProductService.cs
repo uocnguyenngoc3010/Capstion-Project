@@ -47,7 +47,7 @@ namespace FamilyEventt.Services
             {
 
                 var data = await this.context.Product
-                    .Where(x => name == null || x.ProductName.Normalize().Contains(name.Normalize()))
+                    .Where(x => name == null || DataHelper.RemoveUnicode(x.ProductName).ToLower().Contains(DataHelper.RemoveUnicode(name).ToLower()))
                     .Where(x => supplier == null || x.ProductSupplier.Normalize().Contains(supplier.Normalize()))
                     .Where(x => minPrice == null || x.ProductPrice>= minPrice)
                     .Where(x => maxPrice == null || x.ProductPrice<= maxPrice)

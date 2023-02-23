@@ -63,10 +63,12 @@ namespace FamilyEventt.Services
         {
             try
             {
-                name = name.Normalize().ToLower();
+                if (name == null) name = "";
+                name = DataHelper.RemoveUnicode(name).ToLower();
                 var data = await this.context.Decoration
                     .Where(x => minPrice == null || x.DecorationPrice >= minPrice)
                     .Where(x => maxPrice == null || x.DecorationPrice <= maxPrice)
+                    //.Where(x => name == null || x.DecorationName.Normalize().ToLower().Contains(name))
                     .Select(x => new DecorationDto
                     {
                         DecorationPrice = x.DecorationPrice,
@@ -74,7 +76,7 @@ namespace FamilyEventt.Services
                         DecorationImage = x.DecorationImage,
                         DecorationName = x.DecorationName,
                     }).ToListAsync();
-                data = data.Where(x => name == null || x.DecorationName.Normalize().Contains(name)).ToList();
+                data = data.Where(x => name == null || DataHelper.RemoveUnicode(x.DecorationName).ToLower().Contains(name)).ToList();
                 return data;
             }catch(Exception ex)
             {
